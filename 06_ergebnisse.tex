@@ -174,6 +174,51 @@
 \end{figure}
 \FloatBarrier
 
+\vspace*{-5mm}
+% pgf diagramm3 START
+\begin{figure}[h!]
+	\begin{center}
+		%\resizebox{0.8\textwidth}{!}{
+		\begin{tikzpicture}[trim axis left, trim axis right]
+		\begin{axis}[
+		axis lines = left,
+		width = 15cm,
+		height = 8cm,
+		xmin = 0,
+		xmax = 6000,
+		ymin = 0,
+		ymax = 0.5,
+		ylabel={Druckverlust $\Delta p_V$ in \si{\bar}},
+		y label style={at={(-0.095,0.5)}},
+		xlabel={Volumenstrom $\dot{V}$ in \si{\raiseto{3} \meter \per \second}},
+		scaled ticks=false ,
+		legend style={at={(1,1)}}
+		]
+		%rau
+		\addplot[black,mark=*,text mark as node=true,point meta=explicit symbolic,nodes near coords]
+		coordinates {(958,0.056) (1430,0.14) (1962,0.25) (2139,0.315) (2413,0.382)};
+		
+		%glatt (korrigiert)
+		\addplot[black,mark=square*,text mark as node=true,point meta=explicit symbolic,nodes near coords]
+		coordinates {(2111,0.235) (2406,0.3) (2667,0.358) (2866,0.405)};
+		
+		
+		%glatt, dickes Rohr
+		\addplot[black,mark=triangle*,text mark as node=true,point meta=explicit symbolic,nodes near coords]
+		coordinates {(3403,0.065) (3978,0.083) (4557,0.125) (4932,0.135) (5513,0.17)};
+		
+		%Trendlinien
+		
+		\legend{raues Rohr, glattes Rohr (korrigiert), glattes/dickes Rohr}
+		\end{axis}
+		\end{tikzpicture}
+		%	}
+		\caption{Druckverlust zu Volumenstrom}
+		\label{dia:V_pV}
+	\end{center}
+\end{figure}
+\FloatBarrier
+
 %Tabelle START
 \vspace*{-10.5mm}
 \renewcommand{\arraystretch}{1.2}
