@@ -1,25 +1,128 @@
 \chapter{Fehlerbetrachtung}
 \label{sec:fehler}
 
+\vspace*{5mm}
+
+\section*{Beispielfehlerrechnung für den ersten Messwert des rauen Rohres:}
 %Tabelle START
 \vspace*{-2.5mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[h!]
 	\centering
-	\caption{Abweichungen für Fehlerrechnung}
-	\label{tab:abweichungen}
+	\caption{Abweichungen und Messwerte für die Fehlerrechnung}
+	\label{tab:abweichungen_daten}
+	\makebox[\textwidth]{
+	\begin{tabulary}{1.1\textwidth}{C|CC}
+		\hline 
+		\textbf{Messgröße} &\textbf{Messwert \linebreak(1, raues Rohr)} &\textbf{Abweichung} \\ 
+		\hline 
+		Volumenstrom & \SI{958}{\liter\per\hour} &$\pm2,5\%+MW \approx \SI{6,65e-6}{\raiseto{3}\meter \per \second}$\\ 
+		Temperatur &\SI{26,5}{\celsius} &$\pm \SI{0.5}{\kelvin} $\\ 
+		Druckmessungen & \SI{0,06}{\bar} &$2* \pm \SI{2}{\milli \mws}\approx \SI{4079}{\pascal}$\\ 
+		Durchmesser	&	\SI{13,6}{\milli \meter}&$ \pm 0$\\
+		Länge	&	\SI{2,5}{\meter}&$\pm 0$ \\
+		\hline 
+	\end{tabulary}
+	}
+\end{table}
+\FloatBarrier
+\vspace*{-5mm}
+%Tabelle Ende
+\begin{flalign}
+	\Delta p_v 	&= \frac{1}{2}*\frac{l}{d}*\rho(T)*v^2\\[5pt]
+	\lambda 	&= \frac{2*\Delta p_v*d}{l*\rho(T)*v^2}\\[5pt]
+	\label{gl:lambda}
+				&= \frac{2*\Delta p_v*d}{l*\rho(T)*\left(\frac{\dot{V}}{A}\right)^2}
+\end{flalign}
+
+Im Weiteren ist die eigentliche Fehlerrechnung für den ersten Messwert, der Messreihe des rauen Rohres, von $\lambda$ über das totale Differential der Gleichung \ref{gl:lambda} aufgeführt. Wichtig ist dabei zu erwähnen, dass alle Variablen in SI-Einheiten einzusetzen sind bis auf die Temperatur, welche in $\left[\si{\celsius}\right]$ eingesetzt wird.
+
+\newpage
+
+\subsection*{Bildung der Differentiale:}
+\begin{flalign}
+\frac{\partial \lambda}{\partial \Delta p_v} &= \frac{2*d*A^2}{l*\rho(T)*\dot{V}^2} = \frac{d^5*\pi^2}{8*l*\rho(T)*\dot{V}^2}\\[2mm]
+				&= \frac{1250*d^5*\pi^2*\left[\si{\kelvin \raiseto{3} \meter}\right]}{l*(-2683*T+10038000*\left[\si{\kelvin}\right])*\dot{V}^2*\left[\si{\kg}\right]}
+\end{flalign}
+\begin{flalign}
+	\frac{\partial \lambda}{\partial \dot{V}}	&= -\frac{4*\Delta p_v*d*A^2}{l*\rho(T)*\dot{V}^3}=-\frac{\Delta p_v*d^5*\pi^2}{4*l*\rho(T)*\dot{V}^3}\\[2mm]
+					&=- \frac{2500*\Delta p_v*d^5*\pi^2*\left[\si{\kelvin \raiseto{3} \meter}\right]}{l*(-2683*T+10038000*\left[\si{\kelvin}\right])*\dot{V}^3*\left[\si{\kg}\right]}\\[6mm]
+	\frac{\partial \lambda}{\partial T}	&=  \frac{3353750*\Delta p_v*d^5*\pi^2*\left[\si{\kelvin \raiseto{3} \meter}\right]}{l*(-2683*T+10038000*\left[\si{\kelvin}\right])*\dot{V}^2*\left[\si{\kg}\right]}
+\end{flalign}
+
+%Tabelle START
+
+\vspace*{-2.5mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[h!]
+	\centering
+	\caption{Ergebnisse der einzelnen Differentiale für den Messwert 1 des rauen Rohres}
+	\label{tab:differentiale}
 	%\resizebox{10cm}{!}{
-	\begin{tabulary}{\textwidth}{C|C}
-		\hline 
-		\textbf{Messgröße} & \textbf{Abweichung} \\ 
-		\hline 
-		Volumenstrom &  $\pm2,5\%$\\ 
-		Temperatur & $\pm \SI{0.5}{\kelvin} $\\ 
-		Druckmessungen &  $\pm \SI{2}{\milli \mws}$\\ 
-		\hline 
+	\begin{tabulary}{\textwidth}{L|CCC}
+		\hline
+		\textbf{Differenzial} & $\frac{\partial \lambda}{\partial \Delta p_v}$ & $\frac{\partial \lambda}{\partial \dot{V}}$ &$ \frac{\partial \lambda}{\partial T }$\\ 
+		\hline
+			&\SI{3,25e-6}{\meter \raiseto{2}\second\per\kg}&\SI{-146,69}{\second\per\raiseto{3}\meter}&\SI{5,25e-6}{\per\kelvin}\\
+		\hline
 	\end{tabulary}
 	%}
 \end{table}
 \FloatBarrier
-\vspace*{-2.5mm}
 %Tabelle Ende
+
+
+\subsection*{Berechnung des absoluten Fehlers:}
+\begin{flalign}
+	\Delta \lambda	&=  \left|\frac{\partial \lambda}{\partial \Delta p_v}\right|*\Delta p + \left|\frac{\partial \lambda}{\partial \dot{V}}\right|*\Delta \dot{V} + \left|\frac{\partial \lambda}{\partial T}\right|*\Delta T\\
+					&= \left|\SI{3,25e-6}{\meter \raiseto{2}\second\per\kg}\right|*\SI{4079}{\pascal}+ \left|\SI{-146,69}{\second\per\raiseto{3}\meter}\right|\SI{6,65e-6}{\raiseto{3}\meter \per \second}\\
+					&\nonumber \quad+\left|\SI{5,25e-6}{\per\kelvin}\right|*\SI{0,5}{\kelvin}\\[2mm]
+					&= \underline{\SI{0.0142}{}}
+\end{flalign}
+
+\subsection*{Berechnung des relativen Fehlers:}
+\begin{flalign}
+	\frac{\Delta \lambda}{\lambda}	&= \frac{0,0142}{0,0182}\\
+									&\approx \underline{\underline{\SI{78}{\percent}}}
+\end{flalign}
+%Tabelle START
+	\vspace*{-10.5mm}
+	\renewcommand{\arraystretch}{1.2}
+	\begin{table}[h!]
+		\centering
+		\caption{Absolute und relative Fehler von $\lambda$}
+		\label{tab:fehler}
+		%\resizebox{12.6cm}{!}{
+		\makebox[\textwidth]{%
+		\begin{tabular}{c|c|c|c}
+			\textbf{Messpunkt}	& \textbf{Rohrleitungswiderstand} &\textbf{Absoluter Fehler} $\left[-\right]$& \textbf{Relativer Fehler} $\left[\si{\percent}\right]$\\
+			\hline
+			\multicolumn{4}{l}{raues Rohr} \\
+			\hline
+			1&0,018&0,0142&78\\
+			2&0,020&0,0070&34\\
+			3&0,019&0,0041&21\\
+			4&0,021&0,0037&18\\
+			5&0,020&0,0031&16\\
+			\hline
+			\multicolumn{4}{l}{glattes Rohr} \\
+			\hline
+			1&0,026&0,0035&22\\
+			2&0,026&0,0029&19\\
+			(3)&(0,020)&(0,0020)&(17)\\
+			4&0,025&0,0025&17\\
+			5&0,025&0,0022&15\\
+			\hline
+			\multicolumn{4}{l}{glattes, dickes Rohr} \\
+			\hline
+			1&0,031&0,211&68\\
+			2&0,029&0,0156&54\\
+			3&0,033&0,0126&38\\
+			4&0,031&0,0108&35\\
+			5&0,031&0,0089&29\\
+			\hline
+		\end{tabular}}
+	\end{table}
+	\FloatBarrier
+	\vspace*{-2.5mm}
+	%Tabelle Ende

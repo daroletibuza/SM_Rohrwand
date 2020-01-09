@@ -8,9 +8,9 @@
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[h!]
 	\centering
-	\caption{Druckverluste, Volumenströme und Rohrleitungswiderstände}
+	\caption{Messwerte zu Volumen, Zeit und Druck}
 	\label{tab:messwerte}
-%	\resizebox{12.6cm}{!}{
+	\makebox[15cm]{
 		\begin{tabular}{c|c|c|c|c}
 			\textbf{Messpunkt}	& \textbf{Volumen}& \textbf{Zeit} &\textbf{Druck 1}	& \textbf{Druck 2} \\
 			\hline
@@ -37,21 +37,43 @@
 			3&0,01&7,9&0,23&0,10\\
 			4&0,01&7,3&0,26&0,12\\
 			5&0,01&6,5&0,33&0,16\\
-		\end{tabular}
-%	}
+			\hline
+		\end{tabular}}
 \end{table}
 \FloatBarrier
 \vspace*{-2.5mm}
 %Tabelle Ende
 
+\subsection*{Berechnung des Volumenstroms}
+\begin{flalign}
+	\dot{V}	&= \frac{V}{t}\\[2mm]
+	\dot{V}_{1,rau}	&= \frac{V_{1,rau}}{t_{1,rau}}	\\
+				&= \frac{\SI{0,01}{\raiseto{3} \meter}}{\SI{37,6}{\second}}\\
+				&= \SI{2,66e-4}{\raiseto{3} \meter\per\second} \approx \underline{\underline{\SI{958}{\liter\per\hour}}}
+\end{flalign}
+\subsection*{Berechnung der mittleren Geschwindigkeit}
+\begin{flalign}
+\overline{\omega}	&= \frac{\dot{V}}{A}\\[1mm]
+					&=\frac{4*\dot{V}}{\pi*d^2}\\[1mm]
+\overline{\omega}_{1,rau}	&=\frac{4*\dot{V}_{1,rau}}{\pi*\left(d_{1,rau}\right)^2}\\
+							&= \frac{4*\SI{2,66e-4}{\raiseto{3} \meter\per\second}}{\pi*\left(\SI{13,6e-3}{\meter}\right)^2}\\
+							&=\underline{\underline{\SI{1,83}{\meter \per\second}}}
+\end{flalign}
+\subsection*{Berechnung des Druckverlustes}
+\begin{flalign}
+	\Delta p_v		&= p_{i,rau,1}-p_{i,rau,2}\\
+	\Delta p_{v_{1,rau}} &= p_{1,rau,1}-p_{1,rau,2}\\
+					&= \SI{0,07}{\bar}-\SI{0,01}{\bar}\\
+					&=\underline{\underline{\SI{0,06}{\bar}}} \quad (\SI{0,056}{\bar})
+\end{flalign}
 %Tabelle START
-\vspace*{-10.5mm}
+\vspace*{-7.5mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[h!]
 	\centering
-	\caption{Druckverluste, Volumenströme und Rohrleitungswiderstände}
+	\caption{Volumenströme, mittlere Geschwindigkeiten und Druckverluste}
 	\label{tab:berechnung1}
-	%\resizebox{12.6cm}{!}{
+	\resizebox{14cm}{!}{
 		\begin{tabular}{c|c|c|c}
 			\textbf{Messpunkt}	& \textbf{Volumenstrom} & \textbf{mittlere Geschwindigkeit}	& \textbf{Druckverlust}\\
 			\hline
@@ -78,20 +100,42 @@
 			3&4557&3,33&0,13\\
 			4&4932&3,60&0,14\\
 			5&5513&4,03&0,17\\
+			\hline
 		\end{tabular}
-%	}
+	}
 \end{table}
 \FloatBarrier
 \vspace*{-2.5mm}
 %Tabelle Ende
+
+Die folgende Gleichung für die Dichte des Wasser stammt aus linear interpolierten Daten, welche mittels Excel-AddIn für unterschiedlichen Temperaturen bestimmt wurde (siehe \cite{BernhardSpang.2002}). Genutzt wurde dafür die Funktion \texttt{=densW(T$\left[\si{\kelvin}\right]$,p$\left[\si{\bar}\right]$)} mit der Annahme, dass der Druck konstant \SI{1}{\bar} beträgt. Analog gilt dasselbe für die dynamische Viskosität mittels der Funktion \texttt{=viscW(T$\left[\si{\kelvin}\right]$,p$\left[\si{\bar}\right]$)} mit der man in Folge die kinetische Viskosität errechnen kann. \\
+In Bezug auf die Dichtefunktion wurde zwischen der maximal und minimal im Versuch gemessenen Temperatur interpoliert. Die interpolierten Werte sind der Tabelle \ref{tab:dichte} im Anhang unter Abschnitt \ref{sec:anhang} zu entnehmen, sowie die Gleichung selbst unter Gleichung \ref{gl:dichte}.
+\begin{flalign}
+\label{gl:dichte}
+\rho(T) &= \SI{-0,2683}{\kg \per \raiseto{3} \meter \per \kelvin} * T+\SI{1003,8}{\kg \per \raiseto{3} \meter}
+\end{flalign}
+
+\subsection*{Berechnung der kinetischen Viskosität}
+\begin{flalign}
+\nu	&= \frac{\eta}{\rho(T)}\\[2mm]
+\nu_{1,rau}	&=\frac{\SI{8,63e-4}{\pascal\second}}{\SI{996,7}{\kg\per\raiseto{3}\meter}}\\
+			&=\underline{\underline{\SI{8,66e-7}{\raiseto{2}\meter\per\second}}}
+\end{flalign}
+\subsection*{Berechnung der Reynoldszahl}
+\begin{flalign}
+Re	&=\frac{\overline{\omega}*d}{\nu}\\
+Re_{1,rau}	&=\frac{\overline{\omega}_{1,rau}*d_{1,rau}}{\nu_{1,rau}}\\
+			&= \frac{\SI{1,83}{\meter\per\second}*\SI{13,6e-3}{\meter}}{\SI{8,66e-7}{\raiseto{2}\meter\per\second}}\\
+			&\approx \underline{\underline{71687}}
+\end{flalign}
 
 %Tabelle START
 \vspace*{-10.5mm}
 \renewcommand{\arraystretch}{1.2}
 \begin{table}[h!]
 	\centering
-	\caption{Druckverluste, Volumenströme und Rohrleitungswiderstände}
-	\label{tab:excel}
+	\caption{Temperaturen, Dichten, kinetische Viskositäten und Reynoldszahlen}
+	\label{tab:berechnung2}
 	%\resizebox{12.6cm}{!}{
 	\begin{tabular}{c|c|c|c|c}
 		\textbf{Messpunkt}	& \textbf{Temperatur} & \textbf{Dichte}	& \textbf{kine. Viskosität $\left[10^{-7}\right]$} & \textbf{Reynoldszahl}\\
@@ -119,6 +163,56 @@
 		3&26,9&996,6&8,59&85318\\
 		4&26,6&996,7&8,64&91723\\
 		5&26,3&996,7&8,70&101862\\
+		\hline
+	\end{tabular}
+	%	}
+\end{table}
+\FloatBarrier
+\vspace*{-2.5mm}
+%Tabelle Ende
+\subsection*{Berechnung des Rohrleitungswiderstandes}
+\begin{flalign}
+\lambda &= \frac{2*\Delta p_v*d}{l*\rho(T)*v^2}\\[2mm]
+\lambda_{1,rau} &= \frac{2*\Delta p_{v_{1,rau}}*d}{l_{1,rau}*\rho(T)_{1,rau}*\left(v_{1,rau}\right)^2}\\
+				&= \frac{2*\SI{5600}{\pascal}*\SI{13,6e-3}{\meter}}{\SI{2,5}{\meter}*\SI{996,7}{\kg\per\raiseto{3}\meter}*\left(\SI{1,83}{\meter\per\second}\right)^2}\\
+				&= \underline{\underline{0,018}}
+\end{flalign}
+
+%Tabelle START
+\vspace*{-10.5mm}
+\renewcommand{\arraystretch}{1.2}
+\begin{table}[h!]
+	\centering
+	\caption{Druckverluste, Volumenströme und Rohrleitungswiderstände}
+	\label{tab:dpla}
+	%\resizebox{12.6cm}{!}{
+	\begin{tabular}{c|c|c|c}
+		\textbf{Messpunkt}	& \textbf{Volumenstrom} &\textbf{Druckverlust}	& \textbf{Rohrleitungswiderstand} \\
+		\hline
+		\multicolumn{4}{l}{raues Rohr} \\
+		\hline
+		1&958&0,06&0,018\\
+		2&1430&0,14&0,020\\
+		3&1962&0,25&0,019\\
+		4&2139&0,32&0,021\\
+		5&2413&0,41&0,020\\
+		\hline
+		\multicolumn{4}{l}{glattes Rohr} \\
+		\hline
+		1&2111&0,24&0,026\\
+		2&2406&0,30&0,026\\
+		(3)&(2922)&(0,034)&(0,020)\\
+		4&2667&0,36&0,025\\
+		5&2866&0,41&0,025\\
+		\hline
+		\multicolumn{4}{l}{glattes, dickes Rohr} \\
+		\hline
+		1&3403&0,07&0,031\\
+		2&3978&0,08&0,029\\
+		3&4557&0,13&0,033\\
+		4&4932&0,14&0,031\\
+		5&5513&0,17&0,031\\
+		\hline
 	\end{tabular}
 	%	}
 \end{table}
@@ -126,7 +220,9 @@
 \vspace*{-2.5mm}
 %Tabelle Ende
 
-\vspace*{-5mm}
+\textcolor{red}{Glatte Rohre müssten weniger Rohrleitungswiderastand haben, da sich aber Dichte des Wasser verringert steigt somit laut Gleichung der Rohrleitungswiderstand}
+
+\vspace*{-2.5mm}
 % pgf diagramm3 START
 \begin{figure}[h!]
 	\begin{center}
@@ -135,7 +231,7 @@
 		\begin{axis}[
 		axis lines = left,
 		width = 13cm,
-		height = 8cm,
+		height = 7.5cm,
 		xmin = 0,
 		xmax = 0.45,
 		ymin = 0.015,
@@ -169,12 +265,12 @@
 		\end{tikzpicture}
 		%	}
 		\caption{$\lambda$ zu Druckverlust }
-		\label{dia:sedimentation_1}
+		\label{dia:lzud}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-\vspace*{-5mm}
+\vspace*{-2.5mm}
 % pgf diagramm3 START
 \begin{figure}[h!]
 	\begin{center}
@@ -189,7 +285,7 @@
 		ymin = 0,
 		ymax = 0.5,
 		ylabel={Druckverlust $\Delta p_V$ in \si{\bar}},
-		y label style={at={(-0.095,0.5)}},
+		y label style={at={(-0.,0.5)}},
 		xlabel={Volumenstrom $\dot{V}$ in \si{\raiseto{3} \meter \per \second}},
 		scaled ticks=false ,
 		legend style={at={(1,1)}}
@@ -214,50 +310,8 @@
 		\end{tikzpicture}
 		%	}
 		\caption{Druckverlust zu Volumenstrom}
-		\label{dia:V_pV}
+		\label{dia:pzuv}
 	\end{center}
 \end{figure}
 \FloatBarrier
 
-%Tabelle START
-\vspace*{-10.5mm}
-\renewcommand{\arraystretch}{1.2}
-\begin{table}[h!]
-	\centering
-	\caption{Druckverluste, Volumenströme und Rohrleitungswiderstände}
-	\label{tab:dpla}
-	%\resizebox{12.6cm}{!}{
-	\begin{tabular}{c|c|c|c}
-	\textbf{Messpunkt}	& \textbf{Volumenstrom} &\textbf{Druckverlust}	& \textbf{Rohrleitungswiderstand} \\
-	\hline
-	\multicolumn{4}{l}{raues Rohr} \\
-	\hline
-	1&958&0,06&0,018\\
-	2&1430&0,14&0,020\\
-	3&1962&0,25&0,019\\
-	4&2139&0,32&0,021\\
-	5&2413&0,41&0,020\\
-	\hline
-	\multicolumn{4}{l}{glattes Rohr} \\
-	\hline
-	1&2111&0,24&0,026\\
-	2&2406&0,30&0,0,026\\
-	(3)&(2922)&(0,034)&(0,020)\\
-	4&2667&0,36&0,025\\
-	5&2866&0,41&0,025\\
-		\hline
-	\multicolumn{4}{l}{glattes, dickes Rohr} \\
-	\hline
-	1&3403&0,07&0,031\\
-	2&3978&0,08&0,029\\
-	3&4557&0,13&0,033\\
-	4&4932&0,14&0,031\\
-	5&5513&0,17&0,031\\
-	\end{tabular}
-%	}
-\end{table}
-\FloatBarrier
-\vspace*{-2.5mm}
-%Tabelle Ende
-
-\textcolor{red}{Glatte Rohre müssten weniger Rohrleitungswiderastand haben, da sich aber Dichte des Wasser verringert steigt somit laut Gleichung der Rohrleitungswiderstand}
