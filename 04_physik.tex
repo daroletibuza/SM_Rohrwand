@@ -1,2 +1,44 @@
 \section{Theorie}
 \label{sec:theorie}
+
+Grundlage für die Analyse der enthaltenen Metall-Ionen ist die aufgenommene Strom-Spannungs-Kurve des Polarographen. Aufgrund der spezifischen Halbstufenpotentiale von Metall-Ionen ändert sich bei unterschiedlichen Arbeitspotentialen die gemessene Stromstärke. Dieser Strom an der Arbeitselektrode erfolgt aufgrund der Reduktionsreaktion der Metall-Ionen und ist direkt proportional zur Konzentration des umgesetzten Stoffes. Der Strom im Zusammenhang mit diesem Massentransport der Ionen wird als \textsc{Faraday}schen Strom bezeichnet. Um eine ausreichende Leitfähigkeit und somit einen entsprechenden Ladungstransport in der Lösung garantieren zu können werden den untersuchten Proben oft Grundelektrolyten in Form von Salzen, Säuren oder Basen zugegeben.\linebreak
+Aufgrund der spezifischen Halbstufenpotentiale lassen sich qualitative Ergebnisse dieses Verfahrens auswerten. Betrachtet man jedoch auch den Zusammenhang des Stromflusses bei einem bestimmten Arbeitspotential mit der Konzentration des umgesetzten Stoffes, so lassen sich ebenfalls quantitative Bewertungen äußern.\linebreak
+Für diese Betrachtung ist jedoch eine Form der Kalibrierung notwendig, um die gemessenen Signale quantitativ auswerten zu können. Dies ist zum einen über einen externen oder internen Standard möglich, jedoch wurde sich aufgrund der geringen zu bestimmenden Konzentrationen in diesem Versuch für die Aufstockmethode alias Standardadditionsmethode entschieden. Möchte man einen internen oder exterenen Standard nutzen so sind in diesem Fall ebenfalls Kalibrierkurven mit linearem Zusammenhang mittels bekannter Referenz aufzustellen.\linebreak
+Bei dieser Methode wird in diesem Versuch nach dem polarographischen Messen der unbehandelten Probe eine definierte Menge eines bekannten Standards zugegeben. Dieser Standard enthält dabei den zu bestimmenden Stoff in einer exakt bekannten Konzentration. Aus den gemessenen Datenpunkten lässt sich nun eine Geradengleichung bestimmen (siehe Abb. \ref{fig:standardaddition} und Gl. \ref{gl:1}).
+
+\begin{flalign}
+\label{gl:1}
+Y &= \frac{\Delta y}{\Delta x}*X+yA
+\end{flalign}
+
+%Start
+\begin{figure}[h!]
+	\centering
+	\includegraphics[width=0.5\textwidth]{img/Standardaddition}
+	\caption{Darstellung der Standardadditionsmethode \cite{}}
+	\label{fig:standardaddition}
+\end{figure}
+\FloatBarrier
+%Ende
+
+Aus der ermittelten Geradengleichung lässt sich nun aufgrund des geometrischen Beziehung des Strahlensatzes lässt sich die Konzentration der Probe über den Wert $x_A$ in Abb. \ref{fig:standardaddition} bestimmen. Eine Herleitung dazu in unter Gl. \ref{gl:2} und Gl. \ref{gl:3} zu finden.
+
+\begin{flalign}
+\label{gl:2}
+	Y &= \frac{y}{x}*X+yA\\
+	X&= \frac{Y-yA}{\frac{y}{x}}
+\end{flalign}
+
+\textit{Für $Y=0$ heißt das:}
+
+\begin{flalign}
+\label{gl:3}
+X&= x_A = \frac{0-yA}{\frac{y}{x}} = \frac{-yA}{\frac{y}{x}}\\
+x_A&= -c\\
+c	&= \underline{\underline{\frac{yA}{\frac{y}{x}}}}
+\end{flalign}
+
+
+
+
+
